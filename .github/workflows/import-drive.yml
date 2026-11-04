@@ -1,0 +1,42 @@
+# Imports every video from the Google Drive folders, makes web versions and commits them.
+# Run it from: Actions → "Import from Google Drive" → Run workflow.
+name: Import from Google Drive
+on:
+  workflow_dispatch:
+    inputs:
+      folders:
+        description: "Drive folder links separated by spaces (empty = the four portfolio folders)"
+        required: false
+        default: ""
+      transcribe:
+        description: "Transcribe opening seconds (helps curation)"
+        type: boolean
+        default: true
+permissions:
+  contents: write
+concurrency:
+  group: media-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Install ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Import
+        env:
+          TRANSCRIBE: ${{ inputs.transcribe && '1' || '' }}
+        run: scripts/import.sh ${{ inputs.folders }}
+      - name: Commit
+        run: |
+          git config user.name "portfolio-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add media content.json curation scripts/imported.json
+          git diff --cached --quiet && { echo "nothing new"; exit 0; }
+          git commit -m "Import works from Google Drive"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
