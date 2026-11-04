@@ -1,0 +1,55 @@
+<!doctype html>
+<!-- Open Graph card template. Rendered at 1200x630 by scripts/make_og.js -> assets/og.jpg -->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;600&family=JetBrains+Mono:wght@400&family=Lalezar&display=block">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #0b0a08; color: #f3eadb; font-family: "IBM Plex Sans Arabic", sans-serif; }
+  .wrap { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 70px; box-sizing: border-box; }
+  .light { position: absolute; inset: 0; background: radial-gradient(45% 70% at 72% 40%, rgba(255,196,110,.18), transparent 70%), radial-gradient(40% 60% at 20% 60%, rgba(184,98,14,.18), transparent 70%); }
+  .grain { position: absolute; inset: 0; background: url(../assets/img/grain.png); opacity: .06; mix-blend-mode: screen; }
+  .bars { position: absolute; inset: 26px 40px; border-block: 1px solid rgba(243,234,219,.12); }
+  .txt { position: relative; }
+  .eyebrow { font: 15px "JetBrains Mono", monospace; color: #a99e8d; letter-spacing: .12em; direction: ltr; display: flex; gap: 12px; align-items: center; justify-content: flex-end; }
+  .tally { width: 11px; height: 11px; border-radius: 50%; background: #f5a524; box-shadow: 0 0 16px #f5a524; }
+  h1 { font-family: Lalezar, sans-serif; font-weight: 400; font-size: 230px; line-height: .9; margin: 22px 0 0; filter: drop-shadow(0 3px 0 #000) drop-shadow(0 20px 50px rgba(245,165,36,.25)); }
+  .role { color: #f5a524; font-weight: 600; font-size: 30px; display: flex; gap: 14px; align-items: center; }
+  .role::before { content: ""; width: 44px; height: 3px; background: #f5a524; }
+  .tag { font-weight: 300; font-size: 30px; margin-top: 8px; }
+  .reel { position: relative; display: flex; gap: 16px; align-items: center; }
+  .reel img, .reel .ph { width: 150px; height: 266px; object-fit: cover; border-radius: 12px; border: 1px solid rgba(243,234,219,.15); box-shadow: 0 30px 60px rgba(0,0,0,.7); background: #191612; }
+  .reel > :nth-child(2) { width: 186px; height: 330px; border-color: rgba(245,165,36,.6); box-shadow: 0 30px 70px rgba(0,0,0,.8), 0 0 60px rgba(245,165,36,.25); }
+  .tc { position: absolute; bottom: 40px; left: 70px; font: 15px "JetBrains Mono", monospace; color: #ffcf7a; letter-spacing: .14em; direction: ltr; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="light"></div><div class="bars"></div><div class="grain"></div>
+  <div class="txt">
+    <div class="eyebrow"><span>HASSAN — EDIT SUITE · 9:16</span><span class="tally"></span></div>
+    <h1 id="name">حسن</h1>
+    <div class="role" id="role">مونتير ريلز سينمائية</div>
+    <div class="tag" id="tag">أحوّل صفحات التاريخ إلى دقيقة لا تُنسى.</div>
+  </div>
+  <div class="reel" id="reel"><div class="ph"></div><div class="ph"></div><div class="ph"></div></div>
+  <div class="tc">00:00:59:23 · H2SSANALI.GITHUB.IO</div>
+</div>
+<script>
+  window.ogReady = fetch('../content.json').then(r => r.json()).then(c => {
+    const s = c.site || {};
+    if (s.name) document.getElementById('name').textContent = s.name;
+    if (s.role) document.getElementById('role').textContent = s.role;
+    if (s.tagline) document.getElementById('tag').textContent = s.tagline;
+    const ws = (c.works || []).filter(w => !w.hidden && w.poster);
+    const pick = (ws.filter(w => w.featured).length >= 3 ? ws.filter(w => w.featured) : ws).slice(0, 3);
+    if (pick.length) {
+      const reel = document.getElementById('reel');
+      reel.innerHTML = '';
+      pick.forEach(w => { const i = new Image(); i.src = '../' + w.poster; reel.appendChild(i); });
+      return Promise.all([...reel.querySelectorAll('img')].map(i => i.decode().catch(() => {})));
+    }
+  }).then(() => document.fonts.ready);
+</script>
+</body>
+</html>
