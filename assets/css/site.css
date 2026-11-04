@@ -479,6 +479,34 @@ section:not(.hero) { padding: 96px var(--gutter); max-width: calc(var(--max) + 2
    THEMES
    ========================================================================== */
 
+/* 1 · غرفة المونتاج — the original look, kept exactly as first designed */
+[data-theme="suite"] .tl__clip { background: linear-gradient(to bottom, #2a251e, #1f1b16); }
+[data-theme="suite"] .tl__clip:hover { background: #2f2921; border-color: var(--line-2); }
+[data-theme="suite"] .tl__clip.is-active { background: linear-gradient(to bottom, var(--amber-hi), var(--amber)); }
+[data-theme="suite"] .tl__tc { color: var(--amber-hi); }
+[data-theme="suite"] .hero__role::before { box-shadow: 0 0 10px var(--amber); }
+[data-theme="suite"] .btn--amber:hover { box-shadow: 0 14px 38px -10px rgba(245,165,36,.6), inset 0 1px 0 rgba(255,255,255,.4); }
+[data-theme="suite"] .btn--ghost { background: rgba(243,234,219,.03); }
+[data-theme="suite"] .btn--ghost:hover { color: var(--amber-hi); }
+[data-theme="suite"] .track { background: linear-gradient(to bottom, #1d1a15, #15130f); }
+[data-theme="suite"] .track b { background: rgba(243,234,219,.06); }
+[data-theme="suite"] .track[aria-selected="true"] { border-color: rgba(245,165,36,.5); background: linear-gradient(to bottom, #2a2117, #1a150f); }
+[data-theme="suite"] .track[aria-selected="true"]::before { box-shadow: 0 0 10px var(--amber); }
+[data-theme="suite"] .card__top { color: rgba(243,234,219,.7); }
+[data-theme="suite"] .card__star { color: var(--amber); }
+[data-theme="suite"] .card__title { line-height: 1.15; }
+[data-theme="suite"] .card__meta .mono { opacity: .8; }
+@media (hover: hover) {
+  [data-theme="suite"] .card:hover { border-color: rgba(245,165,36,.45); box-shadow: 0 28px 60px -24px rgba(0,0,0,.95), 0 0 0 1px rgba(245,165,36,.15), 0 18px 60px -20px rgba(245,165,36,.4); }
+}
+[data-theme="suite"] .empty { background: repeating-linear-gradient(90deg, transparent 0 46px, rgba(243,234,219,.035) 46px 48px); }
+[data-theme="suite"] ::selection { color: #120b02; }
+[data-theme="suite"] .player__big { background: rgba(245,165,36,.92); }
+[data-theme="suite"] .player__meta { color: var(--amber); }
+[data-theme="suite"] .player__meta .mono { border-color: rgba(245,165,36,.4); }
+[data-theme="suite"] .player__nav:hover { background: rgba(245,165,36,.12); }
+[data-theme="suite"] .player__hint { color: var(--faint); }
+
 /* 2 · أرشيف ورقي — paper, ink and a red stamp */
 [data-theme="archive"] {
   --bg: #ece3d0; --bg-2: #e3d8c1; --panel: #f6f0e3; --panel-2: #fbf7ee;
