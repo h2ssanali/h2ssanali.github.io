@@ -441,7 +441,7 @@ section:not(.hero) { padding: 96px var(--gutter); max-width: calc(var(--max) + 2
   .player__info { inset-inline: 18px; bottom: 82px; width: auto; text-shadow: 0 2px 12px rgba(0,0,0,.9); pointer-events: none; }
   .player__info::before { content: ""; position: absolute; inset: -40px -18px -90px; z-index: -1; background: linear-gradient(to top, rgba(0,0,0,.85), transparent); }
   .player__title { font-size: 1.7rem; }
-  .player__blurb { font-size: .92rem; }
+  .player__blurb { font-size: .92rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .player__controls { bottom: 14px; width: calc(100vw - 28px); }
   .player__nav, .player__hint { display: none; }
   .player__close { top: max(14px, env(safe-area-inset-top)); }

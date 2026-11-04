@@ -273,7 +273,7 @@ def main():
 
     for src in files:
         key = source_key(src)
-        if key in ledger and any(w.get("id") == ledger[key] for w in content["works"]):
+        if key in ledger:  # imported before (even if later removed from the site on purpose)
             print(f"= already imported: {src.name}")
             continue
         if dir_mb(MEDIA) > args.budget_mb:
@@ -285,6 +285,11 @@ def main():
         except Exception as e:  # noqa: BLE001
             print(f"! cannot read {src.name}: {e}")
             skipped.append(src.name)
+            continue
+        if info["dur"] < 1.0:  # a still image (poster/design), not a Reel
+            print(f"- skipping still image: {src.name}")
+            ledger[key] = "skipped:image"
+            save_json(LEDGER, ledger)
             continue
         wid = new_id(key, taken)
         taken.add(wid)
