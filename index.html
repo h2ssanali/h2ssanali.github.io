@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="suite">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -27,10 +27,32 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="content.json" as="fetch" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=JetBrains+Mono:wght@400;600&family=Lalezar&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=JetBrains+Mono:wght@400;600&family=Lalezar&display=swap"></noscript>
   <link rel="stylesheet" href="assets/css/site.css">
-  <script>document.documentElement.classList.add('js')</script>
+  <script>
+    /* theme bootstrap: picks the look before first paint (?theme=archive|noir|teal|suite previews a look) */
+    (function (d) {
+      var r = d.documentElement; r.classList.add('js');
+      var F = {
+        suite: 'family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=JetBrains+Mono:wght@400;600&family=Lalezar',
+        archive: 'family=Aref+Ruqaa:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600&family=Courier+Prime',
+        noir: 'family=Reem+Kufi:wght@500;700&family=Tajawal:wght@300;400;700&family=JetBrains+Mono:wght@400;600',
+        teal: 'family=Marhey:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=JetBrains+Mono:wght@400;600'
+      };
+      window.__themeFonts = function (t) {
+        if (!F[t] || d.getElementById('f-' + t)) return;
+        var l = d.createElement('link'); l.id = 'f-' + t; l.rel = 'stylesheet';
+        l.href = 'https://fonts.googleapis.com/css2?' + F[t] + '&display=swap'; d.head.appendChild(l);
+      };
+      window.__themes = Object.keys(F);
+      var q = new URLSearchParams(location.search).get('theme');
+      var t = q && F[q] ? q : r.getAttribute('data-theme');
+      if (!F[t]) t = 'suite';
+      if (q && F[q]) r.setAttribute('data-theme-locked', '');
+      r.setAttribute('data-theme', t);
+      window.__themeFonts(t);
+    })(document);
+  </script>
 </head>
 <body>
   <a class="skip" href="#works">تخطَّ إلى الأعمال</a>
@@ -116,35 +138,9 @@
       <div class="section-head">
         <p class="mono label">A1 · FX RACK</p>
         <h2 class="display">أسلوبي</h2>
-        <p class="section-sub">الأدوات التي تصنع الإحساس، لا الزينة.</p>
+        <p class="section-sub">لقطات حقيقية من شغلي، كل وحدة فيها لمسة بتتكرر بأعمالي. اضغط على أي لقطة لتشوف الريل كامل.</p>
       </div>
-      <ul class="chips">
-        <li class="chip chip--captions">
-          <div class="chip__demo" aria-hidden="true"><span class="cap"><b>في</b> <b>ليلة</b> <b>واحدة</b> <b>تغيّر</b> <b>كل</b> <b>شيء</b></span></div>
-          <h3>نصوص متحركة</h3>
-          <p>الكلمة تظهر مع نَفَس الراوي، بحجمها ووزنها الصحيح.</p>
-        </li>
-        <li class="chip chip--transition">
-          <div class="chip__demo" aria-hidden="true"><i class="wipe a"></i><i class="wipe b"></i></div>
-          <h3>انتقالات مصمَّمة</h3>
-          <p>كل قطع له منطق: مطابقة حركة، شكل، أو صوت يربط المشهدين.</p>
-        </li>
-        <li class="chip chip--foley">
-          <div class="chip__demo" aria-hidden="true"><span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
-          <h3>فولي وتصميم صوت</h3>
-          <p>خطوات، سيوف، ورق، مطر… الصوت يبني العالم قبل الصورة.</p>
-        </li>
-        <li class="chip chip--puppet">
-          <div class="chip__demo" aria-hidden="true"><span class="paper"><i class="head"></i><i class="body"></i><i class="arm"></i></span></div>
-          <h3>كولاج الدُّمى الورقية</h3>
-          <p>صور الشخصيات الحقيقية تتحوّل إلى قصاصات ورقية تتحرك وتتكلم.</p>
-        </li>
-        <li class="chip chip--camera">
-          <div class="chip__demo" aria-hidden="true"><span class="frame"><i></i></span></div>
-          <h3>كاميرا حيّة</h3>
-          <p>حتى الصورة الثابتة تتنفّس: دفع بطيء، اهتزاز يد، وعمق.</p>
-        </li>
-      </ul>
+      <div class="styles" id="styles"></div>
     </section>
 
     <!-- ABOUT -->

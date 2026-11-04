@@ -3,7 +3,7 @@ name: Add new work
 on:
   push:
     branches: [main]
-    paths: ["incoming/**"]
+    paths: ["incoming/**", "!incoming/*.studio", "!incoming/README.md"]
   workflow_dispatch:
 permissions:
   contents: write

@@ -2,92 +2,138 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
-  <title>الاستوديو — تحرير الموقع</title>
+  <meta name="theme-color" content="#0f0d0a">
+  <title>الاستوديو — تعديل موقعي</title>
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Lalezar&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=Lalezar&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Reem+Kufi:wght@700&family=Marhey:wght@700&display=swap&text=%D8%AD%D8%B3%D9%86">
   <link rel="stylesheet" href="studio.css">
 </head>
 <body>
-  <header class="bar">
-    <div class="bar__brand"><span class="tally"></span><b>الاستوديو</b><span class="mono dim">content.json</span></div>
-    <div class="bar__status" id="status" role="status"></div>
-    <div class="bar__actions">
-      <button class="btn btn--ghost" id="btnReset" type="button" title="تجاهل تعديلاتك والرجوع للنسخة المنشورة">استرجاع المنشور</button>
-      <button class="btn btn--ghost" id="btnDownload" type="button">تنزيل الملف</button>
-      <button class="btn btn--amber" id="btnCopy" type="button">نسخ المحتوى ↗</button>
-    </div>
+  <header class="top">
+    <div class="top__brand"><span class="tally"></span><b>الاستوديو</b></div>
+    <span class="top__status" id="status" role="status"></span>
+    <a class="top__site" href="../" target="_blank" rel="noopener">موقعي ↗</a>
   </header>
 
-  <div class="tabs" role="tablist">
-    <button role="tab" aria-selected="true" data-pane="edit">التحرير</button>
-    <button role="tab" aria-selected="false" data-pane="preview">المعاينة</button>
-  </div>
+  <div class="app" id="app" data-tab="works">
+    <main class="editor">
+      <nav class="tabs" role="tablist" aria-label="أقسام الاستوديو">
+        <button role="tab" data-tab="works"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="7" height="12" rx="1.5"/><rect x="13" y="3" width="7" height="12" rx="1.5"/><path d="M4 19h16"/></svg><span>أعمالي</span></button>
+        <button role="tab" data-tab="look"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.6-.8 1.6-1.6 0-1.2-1-1.5-1-2.6 0-.9.7-1.6 1.6-1.6H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10.5" cy="7" r="1.2"/><circle cx="15" cy="7.5" r="1.2"/></svg><span>الشكل</span></button>
+        <button role="tab" data-tab="info"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>معلوماتي</span></button>
+        <button role="tab" data-tab="preview" class="tabs__preview"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>معاينة</span></button>
+      </nav>
 
-  <main class="layout">
-    <section class="pane pane--edit" id="paneEdit">
-      <details class="box" open>
-        <summary><span class="mono">01</span> الأعمال <span class="count" id="worksCount"></span></summary>
-        <p class="hint">اسحب من المقبض <b>⋮⋮</b> لتغيير الترتيب. <b>★</b> = يظهر في الشوريل أعلى الصفحة. <b>👁</b> = إخفاء العمل من الموقع دون حذفه.</p>
+      <!-- WORKS -->
+      <section class="pane" data-pane="works">
+        <div class="pane__head">
+          <h1>أعمالي <small id="worksCount"></small></h1>
+          <p class="hint">اضغط على أي عمل لتعدّل اسمه وتصنيفه. <b>★</b> = يظهر بالشوريل فوق. رتّبهم بالأسهم أو اسحب من <b>⋮⋮</b>.</p>
+        </div>
         <ol class="works" id="works"></ol>
-      </details>
+        <details class="box" id="catsBox">
+          <summary>التصنيفات</summary>
+          <p class="hint">تغيير اسم التصنيف بيغيّره بكل الأعمال. التصنيف الفاضي ما بيظهر بالموقع.</p>
+          <ul class="cats" id="cats"></ul>
+          <form class="row" id="addCat"><input id="newCat" placeholder="اسم تصنيف جديد" aria-label="اسم تصنيف جديد"><button class="btn btn--ghost" type="submit">إضافة</button></form>
+        </details>
+        <div class="box tip">
+          <b>بدك تضيف فيديو جديد؟</b>
+          <p>ارفعه على GitHub بمجلد <code>incoming</code> (Add file ← Upload files)، وخلال دقائق بيطلع هون لحاله.</p>
+          <a class="btn btn--ghost" href="https://github.com/h2ssanali/h2ssanali.github.io/upload/main/incoming" target="_blank" rel="noopener">رفع فيديو ↗</a>
+        </div>
+      </section>
 
-      <details class="box">
-        <summary><span class="mono">02</span> التصنيفات</summary>
-        <p class="hint">تغيير اسم التصنيف هنا يحدّثه في كل الأعمال تلقائياً. الترتيب هنا = ترتيب الأزرار في الموقع.</p>
-        <ul class="cats" id="cats"></ul>
-        <form class="addcat" id="addCat"><input id="newCat" placeholder="اسم تصنيف جديد" aria-label="اسم تصنيف جديد"><button class="btn btn--ghost" type="submit">إضافة</button></form>
-      </details>
+      <!-- LOOK -->
+      <section class="pane" data-pane="look">
+        <div class="pane__head">
+          <h1>شكل الموقع</h1>
+          <p class="hint">اختار ستايل، وشوفه مباشرة بالمعاينة.</p>
+        </div>
+        <div class="themes" id="themes" role="radiogroup" aria-label="ستايل الموقع"></div>
 
-      <details class="box">
-        <summary><span class="mono">03</span> معلومات الموقع</summary>
-        <div class="fields" id="siteFields"></div>
-      </details>
+        <h2 class="sub">الأقسام</h2>
+        <div class="switches">
+          <label class="switch"><span>قسم «أسلوبي»</span><input type="checkbox" id="showStyle"><i></i></label>
+          <label class="switch"><span>قسم «نبذة»</span><input type="checkbox" id="showAbout"><i></i></label>
+        </div>
 
-      <details class="box">
-        <summary><span class="mono">04</span> طريقة النشر</summary>
-        <ol class="howto">
-          <li>عدّل ما تريد هنا وشاهد النتيجة في المعاينة.</li>
-          <li>اضغط <b>نسخ المحتوى</b>. سيُنسخ الملف وتُفتح صفحة GitHub لتعديل <code>content.json</code>.</li>
-          <li>في صفحة GitHub: اضغط داخل المحرّر، حدّد الكل (<code>Ctrl+A</code> أو ⌘A) ثم الصق (<code>Ctrl+V</code>).</li>
-          <li>اضغط الزر الأخضر <b>Commit changes</b> ثم <b>Commit changes</b> مرة ثانية.</li>
-          <li>خلال دقيقة أو دقيقتين يظهر التعديل على الموقع.</li>
-        </ol>
-      </details>
-    </section>
+        <h2 class="sub">لقطات «أسلوبي»</h2>
+        <p class="hint">كل لقطة مقصوصة من ريل حقيقي. غيّر العنوان والوصف، أو احذف اللي ما بدك ياه.</p>
+        <ol class="styles" id="styles"></ol>
+      </section>
 
-    <section class="pane pane--preview" id="panePreview">
+      <!-- INFO -->
+      <section class="pane" data-pane="info">
+        <div class="pane__head">
+          <h1>معلوماتي</h1>
+          <p class="hint">أي خانة بتتركها فاضية ما بتظهر بالموقع.</p>
+        </div>
+        <h2 class="sub">رقمي وحساباتي</h2>
+        <div class="fields" id="contactFields"></div>
+        <h2 class="sub">النصوص</h2>
+        <div class="fields" id="textFields"></div>
+      </section>
+
+      <!-- PREVIEW (phone tab) -->
+      <section class="pane pane--preview-tab" data-pane="preview"></section>
+    </main>
+
+    <aside class="preview" id="preview">
       <div class="preview__bar">
         <div class="seg" role="group" aria-label="حجم المعاينة">
           <button type="button" data-size="phone" aria-pressed="true">جوال</button>
           <button type="button" data-size="desktop" aria-pressed="false">كمبيوتر</button>
         </div>
-        <a class="mono dim" href="../" target="_blank" rel="noopener">فتح الموقع ↗</a>
       </div>
-      <div class="preview__stage" id="stage">
-        <iframe id="frame" title="معاينة الموقع" src="../?embed=1"></iframe>
-      </div>
-    </section>
-  </main>
+      <div class="preview__stage" id="stage"><iframe id="frame" title="معاينة الموقع" src="../?embed=1"></iframe></div>
+    </aside>
+  </div>
 
-  <dialog class="modal" id="modal">
-    <form method="dialog">
-      <p class="mono amber">COPIED ✓</p>
-      <h2>تم نسخ المحتوى</h2>
-      <ol class="howto">
-        <li>في صفحة GitHub التي فُتحت: اضغط داخل المحرّر.</li>
-        <li>حدّد الكل <code>Ctrl+A</code> (أو ⌘A على ماك) ثم الصق <code>Ctrl+V</code>.</li>
-        <li>اضغط <b>Commit changes</b>، ثم أكّد.</li>
+  <div class="publish" id="publishBar" hidden>
+    <button class="btn btn--amber btn--big" id="btnPublish" type="button">نشر التعديلات</button>
+    <button class="btn btn--ghost" id="btnUndo" type="button" title="رجّع كل شي متل الموقع">تراجع</button>
+  </div>
+
+  <!-- edit one work (bottom sheet on phone) -->
+  <dialog class="sheet" id="workSheet">
+    <form method="dialog" class="sheet__body" id="workForm"></form>
+  </dialog>
+
+  <!-- publish -->
+  <dialog class="sheet" id="pubSheet">
+    <form method="dialog" class="sheet__body">
+      <h2>نشر التعديلات</h2>
+      <ol class="steps">
+        <li>اضغط <b>افتح GitHub</b> تحت. بتنفتح صفحة وفيها تعديلاتك جاهزة.</li>
+        <li>اضغط الزر الأخضر <b>Commit changes…</b></li>
+        <li>وبعدين <b>Commit changes</b> مرة ثانية. وخلص!</li>
       </ol>
-      <p class="hint">لم تُفتح الصفحة؟ <a id="ghLink" target="_blank" rel="noopener">افتحها من هنا</a>.</p>
-      <details class="manual"><summary>لم يعمل النسخ؟ انسخه يدوياً</summary><textarea id="manual" readonly rows="8"></textarea></details>
-      <button class="btn btn--amber" value="ok">تمام</button>
+      <p class="hint">خلال دقيقة أو دقيقتين بيتحدّث موقعك. لازم تكون داخل على GitHub بحسابك.</p>
+      <a class="btn btn--amber btn--big" id="pubGo" target="_blank" rel="noopener">افتح GitHub ↗</a>
+      <details class="manual">
+        <summary>ما زبط؟ جرّب طريقة النسخ واللصق</summary>
+        <ol class="steps">
+          <li>اضغط <b>نسخ المحتوى</b>.</li>
+          <li>افتح صفحة تعديل الملف، حدّد كل النص واحذفه، والصق مكانه.</li>
+          <li>اضغط <b>Commit changes</b> مرتين.</li>
+        </ol>
+        <div class="row">
+          <button class="btn btn--ghost" type="button" id="btnCopy">نسخ المحتوى</button>
+          <a class="btn btn--ghost" href="https://github.com/h2ssanali/h2ssanali.github.io/edit/main/content.json" target="_blank" rel="noopener">صفحة التعديل ↗</a>
+        </div>
+        <textarea id="manual" readonly rows="5" aria-label="المحتوى للنسخ اليدوي"></textarea>
+      </details>
+      <button class="btn btn--ghost" value="close">إغلاق</button>
     </form>
   </dialog>
 
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="studio.js" defer></script>
 </body>
 </html>

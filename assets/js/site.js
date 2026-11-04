@@ -63,9 +63,12 @@
     state.content = content;
     const site = content.site || {};
     state.works = (content.works || []).filter((w) => w && !w.hidden && w.video);
+    setTheme(site.theme);
     bindSite(site);
     renderTracks();
     renderGrid(live);
+    renderStyles(content.style, site.show_style);
+    $('#about').hidden = site.show_about === false;
     showreel.setup();
     ba.setup();
     contact(site);
@@ -477,16 +480,70 @@
     email: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
     whatsapp: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3z"/></svg>',
   };
+  icons.tiktok = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3c.4 2.2 1.8 3.6 4 3.8v3.1a7.6 7.6 0 0 1-4-1.2v6.1a5.8 5.8 0 1 1-5.8-5.8c.3 0 .6 0 .9.1v3.2a2.7 2.7 0 1 0 1.8 2.5V3h3.1z"/></svg>';
+  icons.youtube = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 0 0 1 7.5 31 31 0 0 0 .6 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-4.5 31 31 0 0 0-.4-4.5zM9.8 15.2V8.8L15.5 12z"/></svg>';
+  icons.snapchat = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5c3 0 5.2 2.3 5.2 5.3v2.4c.5.2 1 .1 1.5-.1.6-.2 1.1.5.6 1-.6.5-1.6.8-2.1 1 .6 1.9 2.1 3.4 3.9 3.9.4.1.4.6 0 .8-.8.4-1.7.5-2.3.7-.2.5-.1 1.2-.7 1.2-.8 0-1.6-.4-2.7 0-1.1.4-1.8 1.6-3.4 1.6s-2.3-1.2-3.4-1.6c-1.1-.4-1.9 0-2.7 0-.6 0-.5-.7-.7-1.2-.6-.2-1.5-.3-2.3-.7-.4-.2-.4-.7 0-.8 1.8-.5 3.3-2 3.9-3.9-.5-.2-1.5-.5-2.1-1-.5-.5 0-1.2.6-1 .5.2 1 .3 1.5.1V7.8c0-3 2.2-5.3 5.2-5.3z"/></svg>';
+  icons.x = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.2L1.9 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.3 4.7H5.5l11.2 14.5z"/></svg>';
+
+  const handle = (v) => v.trim().replace(/^@/, '');
+  const asUrl = (v, base) => (/^https?:\/\//i.test(v.trim()) ? v.trim() : base + handle(v));
   function contact(site) {
     const box = $('#contactLinks');
     box.innerHTML = '';
-    const ig = (site.instagram || '').trim();
-    const mail = (site.email || '').trim();
-    const wa = (site.whatsapp || '').replace(/[^\d]/g, '');
-    const add = (href, label, icon, primary) => box.appendChild(el('a', { class: 'btn ' + (primary ? 'btn--amber' : 'btn--ghost'), href, target: href.startsWith('http') ? '_blank' : false, rel: 'noopener' }, icon + `<span>${label}</span>`));
-    if (ig) add(/^https?:/.test(ig) ? ig : `https://instagram.com/${ig.replace(/^@/, '')}`, 'إنستغرام', icons.instagram, !box.children.length);
-    if (wa) add(`https://wa.me/${wa}`, 'واتساب', icons.whatsapp, !box.children.length);
-    if (mail) add(`mailto:${mail}`, 'البريد', icons.email, !box.children.length);
+    const add = (href, label, icon) => box.appendChild(el('a', {
+      class: 'btn ' + (box.children.length ? 'btn--ghost' : 'btn--amber'), href,
+      target: /^https?:/.test(href) ? '_blank' : false, rel: 'noopener',
+    }, icon + `<span>${label}</span>`));
+    const wa = (site.whatsapp || '').replace(/[^\d]/g, '').replace(/^00/, '');
+    if (wa) add(`https://wa.me/${wa}`, 'واتساب', icons.whatsapp);
+    if ((site.instagram || '').trim()) add(asUrl(site.instagram, 'https://instagram.com/'), 'إنستغرام', icons.instagram);
+    if ((site.tiktok || '').trim()) add(asUrl(site.tiktok, 'https://www.tiktok.com/@'), 'تيك توك', icons.tiktok);
+    if ((site.youtube || '').trim()) add(asUrl(site.youtube, 'https://www.youtube.com/@'), 'يوتيوب', icons.youtube);
+    if ((site.snapchat || '').trim()) add(asUrl(site.snapchat, 'https://www.snapchat.com/add/'), 'سناب شات', icons.snapchat);
+    if ((site.x || '').trim()) add(asUrl(site.x, 'https://x.com/'), 'إكس', icons.x);
+    if ((site.email || '').trim()) add(`mailto:${site.email.trim()}`, 'الإيميل', icons.email);
+  }
+
+  /* --------------------------------------------------------------- theme */
+  function setTheme(t) {
+    if (root.hasAttribute('data-theme-locked')) return;
+    if (!(window.__themes || []).includes(t)) t = 'suite';
+    if (window.__themeFonts) window.__themeFonts(t);
+    root.setAttribute('data-theme', t);
+  }
+
+  /* ---------------------------------------------------- style (real clips) */
+  let styleObserver;
+  function renderStyles(items, show) {
+    const sec = $('#style'), box = $('#styles');
+    items = (items || []).filter((s) => s && (s.clip || s.poster));
+    sec.hidden = show === false || !items.length;
+    box.innerHTML = '';
+    if (sec.hidden) return;
+    if (styleObserver) styleObserver.disconnect();
+    styleObserver = new IntersectionObserver((es) => es.forEach((e) => {
+      const v = e.target.querySelector('video');
+      if (!v) return;
+      if (e.isIntersecting && !reduce() && !saveData) { if (!v.src) v.src = v.dataset.src; v.play().catch(() => {}); }
+      else v.pause();
+    }), { threshold: .55 });
+    items.forEach((it, k) => {
+      const work = state.works.find((w) => w.id === it.work);
+      const wrap = el('div', { class: 'style-item' });
+      const card = el(work ? 'button' : 'div', { class: 'style-card', type: work ? 'button' : false, 'aria-label': work ? `شاهد الريل: ${work.title}` : false },
+        `${it.poster ? `<img src="${esc(src(it.poster))}" alt="" loading="lazy" decoding="async" width="360" height="640">` : ''}
+         ${it.clip ? `<video muted playsinline loop preload="none" data-src="${esc(src(it.clip))}" aria-hidden="true"></video>` : ''}
+         <span class="style-card__no mono">FX ${pad(k + 1)}</span>
+         ${work ? '<span class="style-card__go">شوف الريل</span>' : ''}`);
+      const v = card.querySelector('video');
+      if (v) { v.muted = true; v.addEventListener('playing', () => card.classList.add('is-playing')); }
+      if (work) card.addEventListener('click', () => player.openWork(work));
+      wrap.appendChild(card);
+      wrap.appendChild(el('h3', {}, esc(it.title || '')));
+      if (it.text) wrap.appendChild(el('p', {}, esc(it.text)));
+      box.appendChild(wrap);
+      styleObserver.observe(card);
+    });
   }
 
   /* ------------------------------------------------------------ timeline */
@@ -529,9 +586,8 @@
   /* -------------------------------------------------------------- reveal */
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
-    $$('.section-head, .chip, .about__grid, .final__frame').forEach((n, k) => {
+    $$('.section-head, .about__grid, .final__frame').forEach((n) => {
       n.classList.add('reveal');
-      if (n.classList.contains('chip')) n.style.transitionDelay = (k % 5) * 70 + 'ms';
       io.observe(n);
     });
   }

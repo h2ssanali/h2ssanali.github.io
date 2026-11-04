@@ -5,9 +5,16 @@
     "role": "مونتير ريلز سينمائية",
     "tagline": "أحوّل أي قصة إلى دقيقة لا تُنسى.",
     "about": "أصنع ريلز عمودية بإيقاع سينمائي: حكايات من التاريخ، مقاطع بودكاست تتحوّل إلى قصص مصمَّمة، وإعلانات لعلامات تجارية. نصوص تتحرّك مع الكلام، صوت مصمَّم لكل حركة، وكولاج ورقي يعطي الشخصيات الحقيقية حياة. كل ثانية في الريل لها سبب، وكل قطع يدفع الحكاية للأمام.",
-    "instagram": "",
-    "email": "",
+    "theme": "suite",
     "whatsapp": "",
+    "instagram": "",
+    "tiktok": "",
+    "youtube": "",
+    "snapchat": "",
+    "x": "",
+    "email": "",
+    "show_style": true,
+    "show_about": true,
     "og_image": "assets/og.jpg"
   },
   "categories": [
@@ -15,6 +22,50 @@
     "إيمان وتأمّل",
     "أسرة وحياة",
     "إعلانات وعلامات تجارية"
+  ],
+  "style": [
+    {
+      "title": "نص يمشي مع الصوت",
+      "text": "كل كلمة تطلع بوقتها، والكلمة المهمة تاخذ حجمها ولونها.",
+      "clip": "media/style/captions.mp4",
+      "poster": "media/style/captions.webp",
+      "work": "wd856c46"
+    },
+    {
+      "title": "كولاج ورقي",
+      "text": "صور حقيقية تنقصّ وتنلصق على الورق، فتصير الفكرة شي تشوفه بعينك.",
+      "clip": "media/style/collage.mp4",
+      "poster": "media/style/collage.webp",
+      "work": "wb0efe8a"
+    },
+    {
+      "title": "أرقام تحكي",
+      "text": "النسب والأرقام تتحوّل لرسوم تتحرّك، فتفهم الفكرة بلمحة.",
+      "clip": "media/style/numbers.mp4",
+      "poster": "media/style/numbers.webp",
+      "work": "w923d580"
+    },
+    {
+      "title": "أرشيف يرجع للحياة",
+      "text": "جرايد وصور قديمة ولقطات أرشيف تنبني منها قصة كأنك عايشها.",
+      "clip": "media/style/archive.mp4",
+      "poster": "media/style/archive.webp",
+      "work": "w8be5fc8"
+    },
+    {
+      "title": "الكادر يحكي",
+      "text": "تقسيم الكادر والإضاءة يوصّلوا الشعور قبل ما ينقال.",
+      "clip": "media/style/framing.mp4",
+      "poster": "media/style/framing.webp",
+      "work": "w79a94c8"
+    },
+    {
+      "title": "إعلان على الإيقاع",
+      "text": "المنتج يدخل مع النبضة، والقطع على الإيقاع، والرسالة توصل بثواني.",
+      "clip": "media/style/ads.mp4",
+      "poster": "media/style/ads.webp",
+      "work": "w2a77ef1"
+    }
   ],
   "works": [
     {
