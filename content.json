@@ -390,7 +390,7 @@
       "preview": "media/wc4a37c9-loop.mp4",
       "duration": 11.5,
       "featured": false,
-      "hidden": false,
+      "hidden": true,
       "before": ""
     }
   ]
