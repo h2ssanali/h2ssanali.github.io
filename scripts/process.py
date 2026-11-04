@@ -215,10 +215,16 @@ def transcribe(src: Path, dest: Path, seconds: int = 45):
     with tempfile.TemporaryDirectory() as td:
         wav = Path(td) / "a.wav"
         r = subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-t", str(seconds), "-vn",
-                            "-ac", "1", "-ar", "16000", str(wav)], capture_output=True)
+                            "-ac", "1", "-ar", "16000", "-c:a", "pcm_s16le", str(wav)], capture_output=True)
         if r.returncode or not wav.exists():
             return
-        segs, _ = _MODEL.transcribe(str(wav), language="ar", vad_filter=True)
+        import wave
+
+        import numpy as np
+
+        with wave.open(str(wav)) as wf:
+            pcm = np.frombuffer(wf.readframes(wf.getnframes()), dtype=np.int16).astype(np.float32) / 32768.0
+        segs, _ = _MODEL.transcribe(pcm, language="ar", vad_filter=True)
         text = " ".join(s.text.strip() for s in segs)
     dest.write_text(text.strip() + "\n", encoding="utf-8")
 

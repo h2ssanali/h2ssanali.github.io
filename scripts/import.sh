@@ -16,7 +16,7 @@ if [ ${#FOLDERS[@]} -eq 0 ]; then
   )
 fi
 
-python3 -m pip install --quiet --disable-pip-version-check gdown pillow numpy ${TRANSCRIBE:+faster-whisper "av<15"}
+python3 -m pip install --quiet --disable-pip-version-check gdown pillow numpy ${TRANSCRIBE:+faster-whisper}
 
 RAW="${RAW_DIR:-.raw}"
 mkdir -p "$RAW"
