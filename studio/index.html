@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>الاستوديو — تحرير الموقع</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Lalezar&display=swap">
+  <link rel="stylesheet" href="studio.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="bar__brand"><span class="tally"></span><b>الاستوديو</b><span class="mono dim">content.json</span></div>
+    <div class="bar__status" id="status" role="status"></div>
+    <div class="bar__actions">
+      <button class="btn btn--ghost" id="btnReset" type="button" title="تجاهل تعديلاتك والرجوع للنسخة المنشورة">استرجاع المنشور</button>
+      <button class="btn btn--ghost" id="btnDownload" type="button">تنزيل الملف</button>
+      <button class="btn btn--amber" id="btnCopy" type="button">نسخ المحتوى ↗</button>
+    </div>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-pane="edit">التحرير</button>
+    <button role="tab" aria-selected="false" data-pane="preview">المعاينة</button>
+  </div>
+
+  <main class="layout">
+    <section class="pane pane--edit" id="paneEdit">
+      <details class="box" open>
+        <summary><span class="mono">01</span> الأعمال <span class="count" id="worksCount"></span></summary>
+        <p class="hint">اسحب من المقبض <b>⋮⋮</b> لتغيير الترتيب. <b>★</b> = يظهر في الشوريل أعلى الصفحة. <b>👁</b> = إخفاء العمل من الموقع دون حذفه.</p>
+        <ol class="works" id="works"></ol>
+      </details>
+
+      <details class="box">
+        <summary><span class="mono">02</span> التصنيفات</summary>
+        <p class="hint">تغيير اسم التصنيف هنا يحدّثه في كل الأعمال تلقائياً. الترتيب هنا = ترتيب الأزرار في الموقع.</p>
+        <ul class="cats" id="cats"></ul>
+        <form class="addcat" id="addCat"><input id="newCat" placeholder="اسم تصنيف جديد" aria-label="اسم تصنيف جديد"><button class="btn btn--ghost" type="submit">إضافة</button></form>
+      </details>
+
+      <details class="box">
+        <summary><span class="mono">03</span> معلومات الموقع</summary>
+        <div class="fields" id="siteFields"></div>
+      </details>
+
+      <details class="box">
+        <summary><span class="mono">04</span> طريقة النشر</summary>
+        <ol class="howto">
+          <li>عدّل ما تريد هنا وشاهد النتيجة في المعاينة.</li>
+          <li>اضغط <b>نسخ المحتوى</b>. سيُنسخ الملف وتُفتح صفحة GitHub لتعديل <code>content.json</code>.</li>
+          <li>في صفحة GitHub: اضغط داخل المحرّر، حدّد الكل (<code>Ctrl+A</code> أو ⌘A) ثم الصق (<code>Ctrl+V</code>).</li>
+          <li>اضغط الزر الأخضر <b>Commit changes</b> ثم <b>Commit changes</b> مرة ثانية.</li>
+          <li>خلال دقيقة أو دقيقتين يظهر التعديل على الموقع.</li>
+        </ol>
+      </details>
+    </section>
+
+    <section class="pane pane--preview" id="panePreview">
+      <div class="preview__bar">
+        <div class="seg" role="group" aria-label="حجم المعاينة">
+          <button type="button" data-size="phone" aria-pressed="true">جوال</button>
+          <button type="button" data-size="desktop" aria-pressed="false">كمبيوتر</button>
+        </div>
+        <a class="mono dim" href="../" target="_blank" rel="noopener">فتح الموقع ↗</a>
+      </div>
+      <div class="preview__stage" id="stage">
+        <iframe id="frame" title="معاينة الموقع" src="../?embed=1"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="modal" id="modal">
+    <form method="dialog">
+      <p class="mono amber">COPIED ✓</p>
+      <h2>تم نسخ المحتوى</h2>
+      <ol class="howto">
+        <li>في صفحة GitHub التي فُتحت: اضغط داخل المحرّر.</li>
+        <li>حدّد الكل <code>Ctrl+A</code> (أو ⌘A على ماك) ثم الصق <code>Ctrl+V</code>.</li>
+        <li>اضغط <b>Commit changes</b>، ثم أكّد.</li>
+      </ol>
+      <p class="hint">لم تُفتح الصفحة؟ <a id="ghLink" target="_blank" rel="noopener">افتحها من هنا</a>.</p>
+      <details class="manual"><summary>لم يعمل النسخ؟ انسخه يدوياً</summary><textarea id="manual" readonly rows="8"></textarea></details>
+      <button class="btn btn--amber" value="ok">تمام</button>
+    </form>
+  </dialog>
+
+  <script src="studio.js" defer></script>
+</body>
+</html>

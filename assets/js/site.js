@@ -505,6 +505,7 @@
         clipsBox.appendChild(a);
         return { a, top, h };
       });
+      requestAnimationFrame(() => segs.forEach((s) => s.a.classList.toggle('is-narrow', s.a.offsetWidth < 46)));
       finalTc.textContent = tc(REEL);
       update();
     }

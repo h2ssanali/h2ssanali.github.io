@@ -104,6 +104,7 @@ p { margin: 0; }
 .tl__clip.is-active { color: #160d02; background: linear-gradient(to bottom, var(--amber-hi), var(--amber)); border-color: var(--amber); }
 .tl__clip.is-active::before { background: #160d02; opacity: .3; }
 .tl__clip span { overflow: hidden; text-overflow: ellipsis; position: relative; }
+.tl__clip.is-narrow span { display: none; }
 .tl__playhead { position: absolute; top: -6px; bottom: -6px; inset-inline-start: 0; width: 2px; margin-inline-start: -1px; background: var(--amber); box-shadow: 0 0 10px var(--amber); pointer-events: none; will-change: inset-inline-start; }
 .tl__playhead span { position: absolute; top: -1px; left: 50%; width: 10px; height: 8px; transform: translateX(-50%); background: var(--amber); clip-path: polygon(0 0, 100% 0, 50% 100%); }
 .tl__tc { flex: none; font-size: .74rem; color: var(--amber-hi); min-width: 92px; text-align: end; }
@@ -122,19 +123,20 @@ p { margin: 0; }
     radial-gradient(70% 60% at 30% 30%, rgba(184, 98, 14, .14), transparent 70%),
     conic-gradient(from 200deg at 105% -10%, transparent 0deg, rgba(255, 210, 140, .07) 12deg, transparent 28deg);
   animation: lamp 7s ease-in-out infinite alternate;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 88%); mask-image: linear-gradient(to bottom, #000 55%, transparent 88%);
 }
 @keyframes lamp { 0% { opacity: .85; } 40% { opacity: 1; } 43% { opacity: .9; } 46% { opacity: 1; } 100% { opacity: .92; } }
 .hero__bars { position: absolute; inset: calc(var(--tl-h) + 10px) var(--gutter) 22px; border-block: 1px solid var(--line); pointer-events: none; z-index: -1; }
 .hero__bars::before, .hero__bars::after { position: absolute; font: .62rem var(--mono); color: var(--faint); letter-spacing: .14em; }
 .hero__bars::before { content: "2.39 : 1  ·  SCOPE"; top: 8px; inset-inline-end: 0; direction: ltr; }
+@media (max-width: 899px) { .hero__bars::before { display: none; } }
 .hero__bars::after { content: "REEL 01  ·  TAKE 1"; bottom: 8px; inset-inline-start: 0; direction: ltr; }
 .hero__inner { width: 100%; max-width: var(--max); margin: 0 auto; display: grid; gap: 40px; align-items: center; }
 @media (min-width: 900px) {
   .hero__inner { grid-template-columns: 1.25fr 1fr; gap: 6vw; }
 }
-.eyebrow { font-size: .72rem; color: var(--dim); display: flex; align-items: center; gap: 10px; justify-content: flex-end; }
+.eyebrow { font-size: .72rem; color: var(--dim); display: flex; align-items: center; gap: 12px; }
 .hero__text { text-align: start; }
-.hero__text .eyebrow { justify-content: flex-start; flex-direction: row-reverse; width: max-content; max-width: 100%; }
 .hero__name {
   font-family: var(--display); font-weight: 400; line-height: .9;
   font-size: clamp(7rem, 34vw, 15.5rem); margin: 18px 0 6px; letter-spacing: 0;
@@ -155,8 +157,9 @@ p { margin: 0; }
   }
 }
 @keyframes burn { to { --b: 190%; } }
-.hero__role { font-family: var(--mono); font-size: .8rem; color: var(--amber); letter-spacing: .08em; direction: rtl; }
-.hero__tagline { margin-top: 10px; font-size: clamp(1.25rem, 4.6vw, 1.9rem); line-height: 1.5; font-weight: 300; max-width: 22ch; color: var(--ink); }
+.hero__role { font-size: clamp(1rem, 3.4vw, 1.2rem); font-weight: 600; color: var(--amber); display: inline-flex; align-items: center; gap: 12px; }
+.hero__role::before { content: ""; width: 34px; height: 2px; background: var(--amber); box-shadow: 0 0 10px var(--amber); }
+.hero__tagline { margin-top: 10px; font-size: clamp(1.25rem, 4.6vw, 1.9rem); line-height: 1.5; font-weight: 300; max-width: 26ch; color: var(--ink); }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 .hero__scroll { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-size: .64rem; color: var(--faint); letter-spacing: .3em; animation: bob 2.4s ease-in-out infinite; }
 @keyframes bob { 50% { transform: translate(-50%, 5px); } }
@@ -401,7 +404,8 @@ section:not(.hero) { padding: 96px var(--gutter); max-width: calc(var(--max) + 2
 .player__big svg { width: 30px; fill: #160d02; margin-left: 4px; }
 .player.is-playing .player__big { opacity: 0; transform: scale(.7); pointer-events: none; }
 .player__info { position: absolute; inset-inline-end: 4vw; bottom: 30%; width: min(26vw, 340px); }
-.player__meta { font-size: .7rem; color: var(--amber); }
+.player__meta { display: flex; gap: 10px; align-items: center; font-size: .82rem; color: var(--amber); }
+.player__meta .mono { font-size: .7rem; padding: 2px 6px; border: 1px solid rgba(245,165,36,.4); border-radius: 4px; }
 .player__title { font-family: var(--display); font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.15; margin-top: 8px; text-wrap: balance; }
 .player__blurb { color: var(--dim); margin-top: 8px; }
 .player__controls {
