@@ -293,7 +293,10 @@ def main():
         encode_poster(src, info, best_t, MEDIA / f"{wid}.webp")
         encode_preview(src, info, best_t - 1.2, MEDIA / f"{wid}-loop.mp4")
         if args.transcribe:
-            transcribe(src, CURATION / f"{wid}.txt")
+            try:
+                transcribe(src, CURATION / f"{wid}.txt")
+            except Exception as e:  # noqa: BLE001 - transcripts are optional
+                print(f"   (transcript failed: {e})")
         print(f"   main {mb:.1f} MB · loop {(MEDIA / f'{wid}-loop.mp4').stat().st_size / 1024:.0f} KB · poster @ {best_t:.1f}s")
 
         cats = content.get("categories") or []

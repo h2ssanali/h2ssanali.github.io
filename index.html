@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>حسن — مونتير ريلز سينمائية</title>
+  <meta name="description" content="ريلز تاريخية عمودية بإيقاع سينمائي: قصص، شخصيات، حروب واختراعات — مونتاج حسن.">
+  <meta name="theme-color" content="#0a0908">
+  <link rel="canonical" href="https://h2ssanali.github.io/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_AR">
+  <meta property="og:site_name" content="حسن · مونتاج">
+  <meta property="og:title" content="حسن — مونتير ريلز سينمائية">
+  <meta property="og:description" content="أحوّل صفحات التاريخ إلى دقيقة لا تُنسى. شاهد الأعمال.">
+  <meta property="og:url" content="https://h2ssanali.github.io/">
+  <meta property="og:image" content="https://h2ssanali.github.io/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="حسن — مونتير ريلز سينمائية">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="حسن — مونتير ريلز سينمائية">
+  <meta name="twitter:description" content="أحوّل صفحات التاريخ إلى دقيقة لا تُنسى.">
+  <meta name="twitter:image" content="https://h2ssanali.github.io/assets/og.jpg">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="content.json" as="fetch" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600&family=JetBrains+Mono:wght@400;600&family=Lalezar&display=swap">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#works">تخطَّ إلى الأعمال</a>
+
+  <!-- projector-on intro -->
+  <div class="projector" aria-hidden="true"><div class="projector__beam"></div><div class="projector__tc">00:00:00:00</div></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- timeline navigation -->
+  <header class="tl" id="timeline">
+    <a class="tl__brand" href="#top" aria-label="البداية"><span class="tally" aria-hidden="true"></span><span data-bind="name">حسن</span></a>
+    <nav class="tl__track" aria-label="أقسام الصفحة">
+      <div class="tl__clips" id="tlClips"></div>
+      <div class="tl__playhead" id="playhead" aria-hidden="true"><span></span></div>
+    </nav>
+    <div class="tl__tc mono" id="tlTc" aria-hidden="true">00:00:00:00</div>
+  </header>
+
+  <main id="top">
+    <!-- HERO / SHOWREEL -->
+    <section class="hero" id="reel" data-clip="الريل">
+      <div class="hero__light" aria-hidden="true"></div>
+      <div class="hero__bars" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <div class="hero__text">
+          <p class="eyebrow mono"><span class="tally"></span> <span data-bind="name_latin">HASSAN</span> — EDIT SUITE · 9:16</p>
+          <h1 class="hero__name"><span class="burn" data-bind="name">حسن</span></h1>
+          <p class="hero__role" data-bind="role">مونتير ريلز سينمائية</p>
+          <p class="hero__tagline" data-bind="tagline">أحوّل صفحات التاريخ إلى دقيقة لا تُنسى.</p>
+          <div class="hero__cta">
+            <a class="btn btn--amber" href="#works"><span>شاهد الأعمال</span></a>
+            <a class="btn btn--ghost" href="#contact"><span>خلّينا نشتغل</span></a>
+          </div>
+        </div>
+        <figure class="monitor" id="showreel">
+          <div class="monitor__frame">
+            <div class="monitor__screen" id="reelScreen">
+              <div class="leader" id="leader" aria-hidden="true"><div class="leader__sweep"></div><span class="leader__num">3</span></div>
+            </div>
+            <div class="monitor__safe" aria-hidden="true"></div>
+          </div>
+          <figcaption class="monitor__bar mono">
+            <span class="rec"><i></i>PGM</span>
+            <span class="monitor__title" id="reelTitle">SHOWREEL</span>
+            <span id="reelTc">00:00:00:00</span>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="hero__scroll mono" aria-hidden="true">SCROLL ▾</div>
+    </section>
+
+    <!-- WORKS -->
+    <section class="works" id="works" data-clip="الأعمال">
+      <div class="section-head">
+        <p class="mono label">V1 · الأعمال</p>
+        <h2 class="display">الأعمال</h2>
+        <p class="section-sub">ريلز عمودية تحكي التاريخ بإيقاع فيلم. مرّر فوق أي عمل ليتحرّك، واضغط لتشاهده كاملاً.</p>
+      </div>
+      <div class="tracks" role="tablist" aria-label="تصنيف الأعمال" id="tracks"></div>
+      <div class="grid" id="grid" aria-live="polite"></div>
+    </section>
+
+    <!-- BEFORE / AFTER -->
+    <section class="ba" id="before-after" data-clip="قبل وبعد" hidden>
+      <div class="section-head">
+        <p class="mono label">V2 · RAW / GRADE</p>
+        <h2 class="display">قبل وبعد</h2>
+        <p class="section-sub">اسحب الفاصل لترى الفرق بين المادة الخام والريل بعد المونتاج.</p>
+      </div>
+      <div class="ba__picker" id="baPicker"></div>
+      <div class="ba__stage" id="baStage">
+        <div class="ba__layer ba__after" id="baAfter"></div>
+        <div class="ba__layer ba__before" id="baBefore"></div>
+        <div class="ba__handle" id="baHandle" aria-hidden="true"><span></span></div>
+        <span class="ba__tag ba__tag--before mono">قبل</span>
+        <span class="ba__tag ba__tag--after mono">بعد</span>
+        <input class="ba__range" id="baRange" type="range" min="0" max="100" value="50" aria-label="موضع الفاصل بين قبل وبعد">
+      </div>
+    </section>
+
+    <!-- STYLE -->
+    <section class="style" id="style" data-clip="أسلوبي">
+      <div class="section-head">
+        <p class="mono label">A1 · FX RACK</p>
+        <h2 class="display">أسلوبي</h2>
+        <p class="section-sub">الأدوات التي تصنع الإحساس، لا الزينة.</p>
+      </div>
+      <ul class="chips">
+        <li class="chip chip--captions">
+          <div class="chip__demo" aria-hidden="true"><span class="cap"><b>في</b> <b>ليلة</b> <b>واحدة</b> <b>تغيّر</b> <b>كل</b> <b>شيء</b></span></div>
+          <h3>نصوص متحركة</h3>
+          <p>الكلمة تظهر مع نَفَس الراوي، بحجمها ووزنها الصحيح.</p>
+        </li>
+        <li class="chip chip--transition">
+          <div class="chip__demo" aria-hidden="true"><i class="wipe a"></i><i class="wipe b"></i></div>
+          <h3>انتقالات مصمَّمة</h3>
+          <p>كل قطع له منطق: مطابقة حركة، شكل، أو صوت يربط المشهدين.</p>
+        </li>
+        <li class="chip chip--foley">
+          <div class="chip__demo" aria-hidden="true"><span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+          <h3>فولي وتصميم صوت</h3>
+          <p>خطوات، سيوف، ورق، مطر… الصوت يبني العالم قبل الصورة.</p>
+        </li>
+        <li class="chip chip--puppet">
+          <div class="chip__demo" aria-hidden="true"><span class="paper"><i class="head"></i><i class="body"></i><i class="arm"></i></span></div>
+          <h3>كولاج الدُّمى الورقية</h3>
+          <p>صور الشخصيات الحقيقية تتحوّل إلى قصاصات ورقية تتحرك وتتكلم.</p>
+        </li>
+        <li class="chip chip--camera">
+          <div class="chip__demo" aria-hidden="true"><span class="frame"><i></i></span></div>
+          <h3>كاميرا حيّة</h3>
+          <p>حتى الصورة الثابتة تتنفّس: دفع بطيء، اهتزاز يد، وعمق.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about" data-clip="نبذة">
+      <div class="about__grid">
+        <div>
+          <p class="mono label">A2 · VOICE OVER</p>
+          <h2 class="display">نبذة</h2>
+        </div>
+        <div>
+          <p class="about__text" data-bind="about"></p>
+          <ol class="steps">
+            <li><span class="mono">01</span> القصة والبحث</li>
+            <li><span class="mono">02</span> الإيقاع والقطع</li>
+            <li><span class="mono">03</span> الحركة والنصوص</li>
+            <li><span class="mono">04</span> الصوت واللون</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / FINAL FRAME -->
+    <section class="final" id="contact" data-clip="تواصل">
+      <div class="final__frame">
+        <p class="mono label">FINAL FRAME · <span id="finalTc">00:00:59:23</span></p>
+        <h2 class="final__title display">خلّينا نعمل ريلك الجاي</h2>
+        <p class="final__sub">عندك قصة؟ أرسلها، ونحوّلها إلى ريل يُشاهَد للنهاية.</p>
+        <div class="final__links" id="contactLinks"></div>
+      </div>
+      <footer class="credits mono">
+        <span>© <span id="year"></span> <span data-bind="name">حسن</span></span>
+        <span>END OF REEL</span>
+      </footer>
+    </section>
+  </main>
+
+  <!-- PLAYER -->
+  <div class="player" id="player" role="dialog" aria-modal="true" aria-label="مشغّل الفيديو" hidden>
+    <div class="player__bg" id="playerBg" aria-hidden="true"></div>
+    <div class="player__stage" id="playerStage">
+      <video class="player__video" id="pv" playsinline preload="metadata"></video>
+      <button class="player__big" id="pBig" aria-label="تشغيل"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    </div>
+    <div class="player__info">
+      <p class="mono player__meta"><span id="pIndex">01/01</span> · <span id="pCat"></span></p>
+      <h3 class="player__title" id="pTitle"></h3>
+      <p class="player__blurb" id="pBlurb"></p>
+    </div>
+    <div class="player__controls">
+      <button class="pc" id="pPlay" aria-label="تشغيل/إيقاف"><svg viewBox="0 0 24 24"><path class="i-play" d="M8 5v14l11-7z"/><path class="i-pause" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button>
+      <div class="scrub" id="pScrub" role="slider" tabindex="0" aria-label="التقدّم" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="scrub__buf" id="pBuf"></div><div class="scrub__fill" id="pFill"></div><div class="scrub__head" id="pHead"></div></div>
+      <span class="mono pc__tc" id="pTc">00:00:00</span>
+      <button class="pc" id="pMute" aria-label="كتم/تشغيل الصوت"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="i-on" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path class="i-off" d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    </div>
+    <button class="player__nav player__nav--prev" id="pPrev" aria-label="العمل السابق"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+    <button class="player__nav player__nav--next" id="pNext" aria-label="العمل التالي"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+    <button class="player__close" id="pClose" aria-label="إغلاق"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2"/></svg></button>
+    <p class="player__hint mono" aria-hidden="true">← → · SPACE · M · ESC</p>
+  </div>
+
+  <noscript><p class="noscript">هذا الموقع يحتاج JavaScript لتشغيل الفيديوهات.</p></noscript>
+  <script src="assets/js/site.js" defer></script>
+</body>
+</html>
