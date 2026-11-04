@@ -461,3 +461,10 @@ section:not(.hero) { padding: 96px var(--gutter); max-width: calc(var(--max) + 2
 .embed .projector, .embed .grain { display: none; }
 .embed .hero__text > *, .embed .monitor { animation-delay: 0s !important; animation-duration: .3s !important; }
 .embed .burn { animation-delay: 0s !important; animation-duration: .6s !important; }
+.ba__handle span::before { direction: ltr; }
+@media (min-width: 900px) {
+  .ba { display: grid; grid-template-columns: 1fr minmax(320px, 400px); grid-template-areas: "head stage" "picker stage"; column-gap: 6vw; align-items: start; }
+  .ba > .section-head { grid-area: head; align-self: end; }
+  .ba__picker { grid-area: picker; flex-direction: column; align-items: flex-start; }
+  .ba__stage { grid-area: stage; width: 100%; }
+}
