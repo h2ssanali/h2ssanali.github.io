@@ -22,8 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 300
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with: { python-version: "3.12" }
       - name: Install ffmpeg
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
@@ -35,7 +35,7 @@ jobs:
         run: |
           git config user.name "portfolio-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add media content.json curation scripts/imported.json
+          for p in media content.json curation scripts/imported.json; do if [ -e "$p" ]; then git add -A "$p"; fi; done
           git diff --cached --quiet && { echo "nothing new"; exit 0; }
           git commit -m "Import works from Google Drive"
           git pull --rebase origin "${GITHUB_REF_NAME}"

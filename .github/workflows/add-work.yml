@@ -15,8 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with: { python-version: "3.12" }
       - name: Install tools
         run: |
@@ -34,7 +34,7 @@ jobs:
         run: |
           git config user.name "portfolio-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A media content.json curation scripts/imported.json incoming
+          for p in media content.json curation scripts/imported.json incoming; do if [ -e "$p" ]; then git add -A "$p"; fi; done
           git diff --cached --quiet && { echo "nothing new"; exit 0; }
           git commit -m "Add new work from incoming/"
           git pull --rebase origin main
