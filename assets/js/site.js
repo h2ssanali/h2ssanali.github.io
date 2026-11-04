@@ -129,7 +129,7 @@
     if (!canHover) cardObserver = new IntersectionObserver(onCardVisible, { threshold: [0, .7] });
 
     state.list.forEach((w, i) => {
-      const card = el('button', { class: 'card' + (w.preview ? ' has-preview' : ''), type: 'button', style: `--i:${Math.min(i, 12)}`, 'aria-label': `شاهد: ${w.title || ''}` },
+      const card = el('button', { class: 'card' + (w.preview ? ' has-preview' : ''), type: 'button', style: `--i:${Math.min(i, 12)}` },
         `${w.poster ? `<img src="${esc(src(w.poster))}" alt="" loading="${i < 4 ? 'eager' : 'lazy'}" decoding="async" width="360" height="640">` : ''}
          <span class="card__top mono"><span>C${pad(i + 1)}</span>${w.featured ? '<span class="card__star" aria-label="مميّز">●</span>' : ''}</span>
          <span class="card__play">${playIcon}</span>
@@ -501,7 +501,7 @@
       clipsBox.innerHTML = '';
       segs = secs.map((s) => {
         const top = s.offsetTop, h = s.offsetHeight;
-        const a = el('a', { class: 'tl__clip', href: `#${s.id}`, style: `inset-inline-start:${(top / docH) * 100}%;width:calc(${(h / docH) * 100}% - 3px)` }, `<span>${esc(s.dataset.clip)}</span>`);
+        const a = el('a', { class: 'tl__clip', href: `#${s.id}`, 'aria-label': s.dataset.clip, style: `inset-inline-start:${(top / docH) * 100}%;width:calc(${(h / docH) * 100}% - 3px)` }, `<span>${esc(s.dataset.clip)}</span>`);
         clipsBox.appendChild(a);
         return { a, top, h };
       });

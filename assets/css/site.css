@@ -382,7 +382,7 @@ section:not(.hero) { padding: 96px var(--gutter); max-width: calc(var(--max) + 2
 .final__sub { color: var(--dim); margin: 14px auto 0; max-width: 40ch; font-size: 1.08rem; }
 .final__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 34px; }
 .final__links:empty { display: none; }
-.credits { display: flex; justify-content: space-between; gap: 10px; margin-top: 80px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .7rem; color: var(--faint); }
+.credits { display: flex; justify-content: space-between; gap: 10px; margin-top: 80px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .7rem; color: var(--dim); }
 
 /* ------------------------------------------------------------- player --- */
 .player { position: fixed; inset: 0; z-index: 150; background: #000; color: var(--ink); overscroll-behavior: contain; touch-action: none; }
